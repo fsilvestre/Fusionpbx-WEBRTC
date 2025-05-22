@@ -67,6 +67,9 @@ let profileUser = getDbItem("profileUser", extension);       // eg: 100
 let profileName = getDbItem("profileName", fullname);       // eg: Keyla James
 let wssServer = getDbItem("wssServer",  server);           // eg: raspberrypi.local
 let WebSocketPort = getDbItem("WebSocketPort", webPort);   // eg: 444 | 4443
+if (webPort.length && webPort != getDbItem("WebSocketPort", webPort)) {
+	WebSocketPort = webPort;
+}
 let ServerPath = getDbItem("ServerPath", webPath);         // eg: /ws
 let SipUsername = getDbItem("SipUsername", extension);       // eg: webrtc
 let SipPassword = getDbItem("SipPassword", password);       // eg: webrtc

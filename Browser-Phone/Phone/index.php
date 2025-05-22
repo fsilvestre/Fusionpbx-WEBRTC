@@ -84,7 +84,7 @@
         <script type="text/javascript" src="https://dtd6jl0d42sve.cloudfront.net/lib/XMPP/strophe-1.4.1.umd.min.js"></script>
         <script type="text/javascript">
             const server = "<?php echo $_GET['server'] ?>";
-            const webPort = '7443';
+            const webPort = "<?php echo $_GET['webport'] ?>";
             const webPath = '/wss';
             const extension = "<?php echo $_GET['extension'] ?>";
             const password = "<?php echo $_GET['password'] ?>";

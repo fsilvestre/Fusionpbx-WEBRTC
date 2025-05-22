@@ -107,6 +107,18 @@ $contactName = $database->select($sql, null, 'column');
  }
 unset($sql);
 
+$sql = "select sip_profile_uuid from v_sip_profile_domains where sip_profile_domain_name='$_SESSION[domain_name]'";
+$database = new database;
+$domainUUID = $database->select($sql, null, 'column');
+unset($sql);
+
+$sql = "select substring(sip_profile_setting_value from ':(.*)') from v_sip_profile_settings where sip_profile_uuid='$domainUUID' and sip_profile_setting_name='wss-binding' and sip_profile_setting_enabled='true'";
+$database = new database;
+$wssPort = $database->select($sql, null, 'column');
+ if($wssPort == ""){
+    $wssPort = 7443;
+ }
+unset($sql);
 
 
 //get the domains
@@ -118,7 +130,7 @@ $row_style["1"] = "row_style1";
 //show the header and the search
 
 
-echo "<iframe src='https://$_SESSION[domain_name]/Browser-Phone/Phone/index.php?server=$_SESSION[domain_name]&extension=$extension&password=$password&fullname=$contactName' width='100%' height='100%' frameborder='none'></iframe>";
+echo "<iframe src='https://$_SESSION[domain_name]/Browser-Phone/Phone/index.php?server=$_SESSION[domain_name]&webport=$wssPort&extension=$extension&password=$password&fullname=$contactName' width='100%' height='100%' frameborder='none'></iframe>";
 echo "<br /><br />";
 
 //include the footer
